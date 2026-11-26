@@ -1,69 +1,10 @@
-import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
-import { getPublishedPost } from "../lib/blogRepository";
+import blogPosts from "../data/blogData";
 import "./Blog.css";
 
 function BlogArticle() {
   const { slug } = useParams();
-  const [result, setResult] = useState({
-    slug: null,
-    status: "loading",
-    post: null,
-    error: "",
-  });
-
-  useEffect(() => {
-    let active = true;
-    getPublishedPost(slug)
-      .then((post) => {
-        if (active) setResult({ slug, status: "loaded", post, error: "" });
-      })
-      .catch((error) => {
-        if (active) {
-          setResult({ slug, status: "error", post: null, error: error.message });
-        }
-      });
-    return () => {
-      active = false;
-    };
-  }, [slug]);
-
-  const isCurrentSlug = result.slug === slug;
-  const post = isCurrentSlug ? result.post : null;
-
-  useEffect(() => {
-    if (!post) return;
-    document.title = `${post.title} | المدونة | حلول سوفت`;
-    document
-      .querySelector('meta[name="description"]')
-      ?.setAttribute("content", post.excerpt);
-  }, [post]);
-
-  if (!isCurrentSlug || result.status === "loading") {
-    return (
-      <section className="page-hero blog-not-found">
-        <div className="container page-hero-content">
-          <span className="section-kicker">المدونة</span>
-          <h1>جارٍ تحميل المقال...</h1>
-        </div>
-      </section>
-    );
-  }
-
-  if (result.status === "error") {
-    return (
-      <section className="page-hero blog-not-found">
-        <div className="container page-hero-content">
-          <span className="section-kicker">المدونة</span>
-          <h1>تعذر تحميل المقال</h1>
-          <p>تحقق من اتصال المدونة وحاول مجددًا.</p>
-          <Link className="button button-outline" to="/blog">
-            العودة إلى المدونة
-          </Link>
-        </div>
-      </section>
-    );
-  }
+  const post = blogPosts.find((article) => article.slug === slug);
 
   if (!post) {
     return (

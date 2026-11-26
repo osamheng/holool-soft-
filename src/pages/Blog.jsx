@@ -1,40 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router";
-import { getPublishedPosts } from "../lib/blogRepository";
+import blogPosts from "../data/blogData";
 import "./Blog.css";
 
 function Blog() {
   const [activeCategory, setActiveCategory] = useState("الكل");
-  const [loadState, setLoadState] = useState({
-    status: "loading",
-    posts: [],
-    error: "",
-  });
-
-  useEffect(() => {
-    let active = true;
-    getPublishedPosts()
-      .then((posts) => {
-        if (active) setLoadState({ status: "loaded", posts, error: "" });
-      })
-      .catch((error) => {
-        if (active) {
-          setLoadState({ status: "error", posts: [], error: error.message });
-        }
-      });
-    return () => {
-      active = false;
-    };
-  }, []);
-
-  const categories = [
-    "الكل",
-    ...new Set(loadState.posts.map((post) => post.category)),
-  ];
+  const categories = ["الكل", ...new Set(blogPosts.map((post) => post.category))];
   const posts =
     activeCategory === "الكل"
-      ? loadState.posts
-      : loadState.posts.filter((post) => post.category === activeCategory);
+      ? blogPosts
+      : blogPosts.filter((post) => post.category === activeCategory);
 
   return (
     <>
@@ -48,9 +23,6 @@ function Blog() {
             أفكار وتجارب عملية تساعدك على فهم التقنية واتخاذ قرارات أفضل
             لمشروعك الرقمي.
           </p>
-          <Link className="blog-editor-access" to="/admin/login">
-            دخول المحررين <span aria-hidden="true">↗</span>
-          </Link>
         </div>
       </section>
       <section className="section blog-list-section">
@@ -78,25 +50,10 @@ function Blog() {
               ))}
             </div>
           </div>
-          {loadState.status === "loading" && (
-            <p className="blog-state-message">جارٍ تحميل المقالات...</p>
-          )}
-          {loadState.status === "error" && (
-            <div className="blog-state-message blog-state-error" role="alert">
-              <p>تعذر تحميل المقالات حاليًا. تحقق من اتصال المدونة وحاول مجددًا.</p>
-              <button
-                className="button button-outline"
-                type="button"
-                onClick={() => window.location.reload()}
-              >
-                إعادة المحاولة
-              </button>
-            </div>
-          )}
-          {loadState.status === "loaded" && posts.length === 0 && (
+          {posts.length === 0 && (
             <p className="blog-state-message">لا توجد مقالات منشورة حاليًا.</p>
           )}
-          {loadState.status === "loaded" && posts.length > 0 && (
+          {posts.length > 0 && (
             <div className="blog-grid">
               {posts.map((post, index) => (
               <article

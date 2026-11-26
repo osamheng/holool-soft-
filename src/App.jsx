@@ -1,8 +1,6 @@
 import { Route, Routes, useLocation } from "react-router";
 import { lazy, Suspense, useEffect } from "react";
 import About from "./pages/About";
-import AdminDashboard from "./pages/AdminDashboard";
-import AdminLogin from "./pages/AdminLogin";
 import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
 import Home from "./pages/Home";
@@ -10,7 +8,6 @@ import Portfolio from "./pages/Portfolio";
 import Services from "./pages/Services";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import RequireEditor from "./components/RequireEditor";
 import blogPosts from "./data/blogData";
 import "./App.css";
 
@@ -41,14 +38,6 @@ const pageMetadata = {
     title: "المدونة | حلول سوفت",
     description:
       "مقالات وأفكار عملية من فريق حلول سوفت عن تطوير الويب والتقنية والأمان الرقمي.",
-  },
-  "/admin": {
-    title: "إدارة المدونة | حلول سوفت",
-    description: "لوحة إدارة مقالات مدونة حلول سوفت.",
-  },
-  "/admin/login": {
-    title: "دخول المحررين | حلول سوفت",
-    description: "تسجيل دخول محرري مدونة حلول سوفت.",
   },
   "/contact": {
     title: "تواصل معنا | حلول سوفت",
@@ -101,15 +90,6 @@ function App() {
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogArticle />} />
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route
-            path="/admin"
-            element={
-              <RequireEditor>
-                <AdminDashboard />
-              </RequireEditor>
-            }
-          />
           <Route
             path="/contact"
             element={

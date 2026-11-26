@@ -2,21 +2,6 @@
   background: var(--soft);
 }
 
-.blog-editor-access {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  margin-top: 15px;
-  color: var(--navy);
-  font-size: 12px;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.blog-editor-access:hover {
-  color: var(--orange);
-}
-
 .blog-state-message {
   margin: 0;
   padding: 26px;
@@ -26,16 +11,6 @@
   color: var(--muted);
   font-size: 14px;
   line-height: 1.8;
-}
-
-.blog-state-error {
-  display: grid;
-  justify-items: start;
-  gap: 12px;
-}
-
-.blog-state-error p {
-  margin: 0;
 }
 
 .blog-list-heading {
