@@ -1,7 +1,3 @@
-import qualicupScreenshot from "../assets/projects/qualicup.webp";
-import mochaLandScreenshot from "../assets/projects/mocha-land.webp";
-import coffeeStoryScreenshot from "../assets/projects/coffee-story.webp";
-
 const projectsData = [
   {
     id: "qualicup",
@@ -14,7 +10,7 @@ const projectsData = [
       "منصة رقمية متخصصة لإدارة جودة القهوة، تقييم العينات، وتنظيم جلسات التذوق وتحليل النتائج.",
     contribution:
       "تصميم وتطوير منصة لإدارة العينات والتقييم الحسي والتقارير ضمن سير عمل موحد.",
-    screenshot: qualicupScreenshot,
+    screenshot: "/assets/images/projects/qualicup.webp",
     screenshotAlt: "لقطة شاشة من موقع QualiCup",
   },
   {
@@ -28,7 +24,7 @@ const projectsData = [
       "موقع متكامل يعرض محاصيل البن اليمني، مناطق الإنتاج، ورحلة الجودة والتصدير بواجهة عربية.",
     contribution:
       "تصميم وتطوير موقع عربي يعرض المنتجات والمناطق الزراعية ومراحل الجودة والتصدير.",
-    screenshot: mochaLandScreenshot,
+    screenshot: "/assets/images/projects/mocha-land.webp",
     screenshotAlt: "لقطة شاشة من موقع موكا لاند",
   },
   {
@@ -42,7 +38,7 @@ const projectsData = [
       "منصة تعريفية لمؤسسة حكاية بُن تسلط الضوء على القهوة اليمنية ومراحل العناية بها وسلسلة القيمة.",
     contribution:
       "تصميم وتطوير موقع المؤسسة لعرض قصة البن اليمني ومراحل العناية به ومحتوى المؤسسة.",
-    screenshot: coffeeStoryScreenshot,
+    screenshot: "/assets/images/projects/coffee-story.webp",
     screenshotAlt: "لقطة شاشة من موقع مؤسسة حكاية بُن",
   },
 ];
