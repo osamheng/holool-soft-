@@ -18,12 +18,16 @@ export function renderBlogPage(activeCategory = "الكل") {
   const postCards = posts
     .map(
       (post, index) => `
-        <article class="blog-card${index === 0 ? " blog-card-featured" : ""}">
+        <article class="blog-card">
           <a class="blog-card-link" href="/blog/${encodeURIComponent(post.slug)}" aria-label="اقرأ المقال: ${escapeHTML(post.title)}">
-            <div class="blog-card-art" aria-hidden="true">
-              <span class="blog-card-mark">${escapeHTML(post.icon)}</span>
+            <div class="blog-card-art${post.coverImage ? " blog-card-art-image" : ""}" aria-hidden="true">
+              ${
+                post.coverImage
+                  ? `<img class="blog-card-cover" src="${escapeHTML(post.coverImage)}" alt=""
+                    ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`
+                  : `<span class="blog-card-mark">${escapeHTML(post.icon)}</span>`
+              }
               <span class="blog-card-category">${escapeHTML(post.category)}</span>
-              <span class="blog-card-index">${String(index + 1).padStart(2, "0")}</span>
             </div>
             <div class="blog-card-content">
               <div class="blog-card-meta"><time datetime="${escapeHTML(post.publishedAt)}">${escapeHTML(post.publishedLabel)}</time><span>${escapeHTML(post.readingTime)} قراءة</span></div>

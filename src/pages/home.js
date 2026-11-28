@@ -2,6 +2,66 @@ import { escapeHTML, renderCtaBanner, renderProjectPreview } from "../components
 import projectsData from "../data/projectsData.js";
 import servicesData from "../data/servicesData.js";
 
+function renderHeroServiceShowcase() {
+  const slides = servicesData
+    .map(
+      (service, index) => `
+        <a class="service-slide${index === 0 ? " is-active" : ""}" data-service-slide
+          href="/services/${encodeURIComponent(service.id)}" aria-label="${escapeHTML(service.title)}"
+          aria-hidden="${index !== 0}" tabindex="${index === 0 ? "0" : "-1"}">
+          <img src="/assets/images/services/${escapeHTML(service.id)}.svg" alt=""
+            ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">
+          <span class="service-slide-label">${escapeHTML(service.title)}</span>
+        </a>`,
+    )
+    .join("");
+  const controls = servicesData
+    .map(
+      (service, index) => `
+        <button class="service-slide-control" type="button" data-service-slide-index="${index}"
+          aria-label="عرض ${escapeHTML(service.title)}" aria-pressed="${index === 0}"></button>`,
+    )
+    .join("");
+
+  return `
+    <div class="hero-art service-showcase">
+      ${slides}
+      <div class="service-slide-controls" role="group" aria-label="التنقل بين الخدمات">
+        <button class="service-slide-step" type="button" data-service-slide-step="-1"
+          aria-label="الخدمة السابقة"><span aria-hidden="true">‹</span></button>
+        ${controls}
+        <button class="service-slide-step" type="button" data-service-slide-step="1"
+          aria-label="الخدمة التالية"><span aria-hidden="true">›</span></button>
+      </div>
+    </div>`;
+}
+
+function renderHeroServiceCopy() {
+  return servicesData
+    .map(
+      (service, index) => `
+        <div class="hero-copy-slide${index === 0 ? " is-active" : ""}" data-service-copy
+          aria-hidden="${index !== 0}" ${index !== 0 ? "inert" : ""}>
+          <span class="eyebrow"><span></span> خدمات حلول سوفت</span>
+          <h1>نحوّل فكرتك إلى<br><span>${escapeHTML(service.title)}</span></h1>
+          <p>${escapeHTML(service.shortDescription)}</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="/contact?service=${encodeURIComponent(service.id)}">
+              اطلب هذه الخدمة <span aria-hidden="true">↗</span>
+            </a>
+            <a class="button button-quiet" href="/services/${encodeURIComponent(service.id)}">
+              تفاصيل الخدمة <span aria-hidden="true">←</span>
+            </a>
+          </div>
+          <div class="hero-proof">
+            <span class="proof-mark" aria-hidden="true">✓</span>
+            <span>${escapeHTML(service.features[0])}</span>
+          </div>
+        </div>`,
+    )
+    .join("");
+}
+
 export function renderHomePage() {
   const serviceCards = servicesData
     .map(
@@ -9,25 +69,23 @@ export function renderHomePage() {
         <article class="service-card">
           <div class="service-card-top">
             <span class="service-icon" aria-hidden="true">${escapeHTML(service.icon)}</span>
-            <span class="service-number">${escapeHTML(service.number)}</span>
           </div>
           <h3>${escapeHTML(service.title)}</h3>
           <p>${escapeHTML(service.shortDescription)}</p>
-          <a href="/services#${escapeHTML(service.id)}" class="text-link">اكتشف الخدمة <span aria-hidden="true">←</span></a>
+          <a href="/services/${encodeURIComponent(service.id)}" class="text-link">اكتشف الخدمة <span aria-hidden="true">←</span></a>
         </article>`,
     )
     .join("");
 
   const process = [
-    ["01", "التحليل والتخطيط", "نفهم أهدافك ونحوّل احتياجك إلى خطة واضحة ونطاق عمل محدد."],
-    ["02", "التصميم وتجربة المستخدم", "نرسم تجربة سهلة وواجهات تعبّر عن علامتك وتخدم جمهورك."],
-    ["03", "البرمجة والتطوير", "نبني الحل التقني ونراجع تفاصيله معك خلال مراحل التنفيذ."],
-    ["04", "الاختبار والإطلاق", "نختبر المنتج ونجهزه للإطلاق، ثم نساندك في الخطوة التالية."],
+    ["التحليل والتخطيط", "نفهم أهدافك ونحوّل احتياجك إلى خطة واضحة ونطاق عمل محدد."],
+    ["التصميم وتجربة المستخدم", "نرسم تجربة سهلة وواجهات تعبّر عن علامتك وتخدم جمهورك."],
+    ["البرمجة والتطوير", "نبني الحل التقني ونراجع تفاصيله معك خلال مراحل التنفيذ."],
+    ["الاختبار والإطلاق", "نختبر المنتج ونجهزه للإطلاق، ثم نساندك في الخطوة التالية."],
   ]
     .map(
-      ([number, title, description]) => `
+      ([title, description]) => `
         <li class="process-step">
-          <span class="process-number">${number}</span>
           <span class="process-line" aria-hidden="true"></span>
           <h3>${title}</h3><p>${description}</p>
         </li>`,
@@ -36,11 +94,11 @@ export function renderHomePage() {
 
   const projects = projectsData
     .map(
-      (project, index) => `
+      (project) => `
         <article class="portfolio-card">
           ${renderProjectPreview(project)}
           <div class="portfolio-info">
-            <div class="project-card-meta"><span>${escapeHTML(project.categoryLabel)}</span><span>0${index + 1}</span></div>
+            <div class="project-card-meta"><span>${escapeHTML(project.categoryLabel)}</span></div>
             <h3>${escapeHTML(project.name)}</h3>
             <p>${escapeHTML(project.description)}</p>
             <a class="text-link" href="${project.url}" target="_blank" rel="noreferrer">زيارة المشروع <span aria-hidden="true">↗</span></a>
@@ -48,33 +106,17 @@ export function renderHomePage() {
         </article>`,
     )
     .join("");
+  const heroServiceCopy = renderHeroServiceCopy();
+  const heroServiceShowcase = renderHeroServiceShowcase();
 
   return `
     <section class="hero-section">
       <div class="hero-grid-pattern" aria-hidden="true"></div>
-      <div class="container hero-layout">
+      <div class="container hero-layout" data-service-showcase role="region" aria-label="خدمات حلول سوفت">
         <div class="hero-copy">
-          <span class="eyebrow"><span></span> شريكك التقني من الفكرة إلى الإطلاق</span>
-          <h1>نبني حلولًا رقمية<br><span>تحرّك أعمالك للأمام</span></h1>
-          <p>في حلول سوفت، نحول أفكارك إلى مواقع ومنصات وأنظمة رقمية تساعد مشروعك على النمو بثقة.</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="/contact">ابدأ مشروعك <span aria-hidden="true">↗</span></a>
-            <a class="button button-quiet" href="/portfolio">تصفح أعمالنا <span aria-hidden="true">←</span></a>
-          </div>
-          <div class="hero-proof"><span class="proof-mark" aria-hidden="true">✓</span><span>تخطيط واضح · تنفيذ متقن · دعم مستمر</span></div>
+          ${heroServiceCopy}
         </div>
-        <div class="hero-art" aria-label="رسم توضيحي لحلول تقنية مترابطة">
-          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="hero-glow"></div>
-          <div class="puzzle-piece piece-blue"><span>&lt;/&gt;</span></div>
-          <div class="puzzle-piece piece-orange"><span>✦</span></div>
-          <div class="puzzle-piece piece-white"><span>⌘</span></div>
-          <div class="hero-code-card">
-            <span class="code-caption">IDEAS INTO DIGITAL</span>
-            <span class="code-main">{ <span>grow</span> }</span>
-            <span class="code-status"><i></i> كل شيء يبدأ بفكرة</span>
-          </div>
-          <span class="art-spark spark-one">✳</span><span class="art-spark spark-two">✦</span>
-        </div>
+        ${heroServiceShowcase}
       </div>
       <div class="container hero-bottom"><span>منهجية تناسب هدفك</span><span class="hero-bottom-line"></span><span>تقنية تصنع أثرًا</span></div>
     </section>
@@ -91,9 +133,8 @@ export function renderHomePage() {
     <section class="section about-section">
       <div class="container about-layout">
         <div class="about-visual">
-          <div class="about-mark-grid" aria-hidden="true"><span>&lt;/&gt;</span><span>✦</span><span>⌘</span><span>✓</span></div>
-          <div class="about-note"><span class="about-note-icon">✓</span><span><strong>من الفكرة إلى التنفيذ</strong><small>شريكك في كل خطوة</small></span></div>
-          <span class="about-orbit" aria-hidden="true"></span>
+          <img class="about-illustration" src="/assets/images/about/understanding-needs.svg"
+            alt="" aria-hidden="true" loading="lazy" decoding="async">
         </div>
         <div class="about-copy">
           <span class="section-kicker">من نحن</span>

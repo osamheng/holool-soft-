@@ -1,7 +1,6 @@
 const servicesData = [
   {
     id: "web",
-    number: "01",
     icon: "</>",
     title: "تصميم وتطوير المواقع",
     shortDescription:
@@ -13,7 +12,6 @@ const servicesData = [
   },
   {
     id: "mobile",
-    number: "02",
     icon: "▣",
     title: "تطوير تطبيقات الجوال",
     shortDescription:
@@ -25,7 +23,6 @@ const servicesData = [
   },
   {
     id: "systems",
-    number: "03",
     icon: "⌘",
     title: "الأنظمة والمنصات البرمجية",
     shortDescription:
@@ -37,7 +34,6 @@ const servicesData = [
   },
   {
     id: "hosting",
-    number: "04",
     icon: "⌁",
     title: "الاستضافة وحجز النطاقات",
     shortDescription:

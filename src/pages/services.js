@@ -5,16 +5,18 @@ export function renderServicesPage() {
   const services = servicesData
     .map(
       (service) => `
-        <article class="detail-service" id="${escapeHTML(service.id)}">
-          <span class="detail-service-number">${escapeHTML(service.number)}</span>
-          <div class="detail-service-content">
-            <span class="service-icon">${escapeHTML(service.icon)}</span>
-            <h2>${escapeHTML(service.title)}</h2><p>${escapeHTML(service.description)}</p>
-            <div class="service-detail-meta">
-              <div><h3>لمن هذه الخدمة؟</h3><p>${escapeHTML(service.audience)}</p></div>
-              <div><h3>ما الذي تتضمنه؟</h3><ul>${service.features.map((feature) => `<li>${escapeHTML(feature)}</li>`).join("")}</ul></div>
-            </div>
-            <a class="button button-primary" href="/contact?service=${encodeURIComponent(service.id)}">اطلب هذه الخدمة <span aria-hidden="true">↗</span></a>
+        <article class="service-product-card" id="${escapeHTML(service.id)}">
+          <div class="service-product-art">
+            <img src="/assets/images/services/${escapeHTML(service.id)}.svg"
+              alt="" loading="lazy" decoding="async">
+          </div>
+          <div class="service-product-content">
+            <span class="service-icon" aria-hidden="true">${escapeHTML(service.icon)}</span>
+            <h2>${escapeHTML(service.title)}</h2>
+            <p class="service-product-summary">${escapeHTML(service.shortDescription)}</p>
+            <a class="button button-outline service-product-more" href="/services/${encodeURIComponent(service.id)}">
+              تفاصيل أكثر <span aria-hidden="true">←</span>
+            </a>
           </div>
         </article>`,
     )
@@ -22,6 +24,15 @@ export function renderServicesPage() {
 
   return `
     ${renderPageHero("خدماتنا", 'حلول تقنية تناسب <span>احتياجك</span>', "من موقعك الأول إلى منصتك المتكاملة، نساعدك في اختيار الحل المناسب وتنفيذه.")}
-    <section class="section detailed-services"><div class="container">${services}</div></section>
+    <section class="section services-catalog-section">
+      <div class="container">
+        <div class="services-catalog-heading">
+          <span class="section-kicker">خدمات حلول سوفت</span>
+          <h2>اكتشف الخدمة المناسبة لمشروعك</h2>
+          <p>استعرض الخدمات، وانتقل إلى صفحة التفاصيل لمعرفة ما تتضمنه كل خدمة.</p>
+        </div>
+        <div class="services-catalog-grid">${services}</div>
+      </div>
+    </section>
     ${renderCtaBanner()}`;
 }

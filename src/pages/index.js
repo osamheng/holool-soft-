@@ -5,7 +5,9 @@ import { renderContactPage } from "./contact.js";
 import { renderHomePage } from "./home.js";
 import { renderPortfolioPage } from "./portfolio.js";
 import { renderServicesPage } from "./services.js";
+import { renderServiceDetailPage } from "./serviceDetail.js";
 import blogPosts from "../data/blogData.js";
+import servicesData from "../data/servicesData.js";
 
 export const pageMetadata = {
   "/": {
@@ -41,6 +43,9 @@ export function renderPage(pathname, { portfolioFilter, blogCategory } = {}) {
   if (pathname === "/") return renderHomePage();
   if (pathname === "/about") return renderAboutPage();
   if (pathname === "/services") return renderServicesPage();
+  if (pathname.startsWith("/services/")) {
+    return renderServiceDetailPage(pathname.slice("/services/".length));
+  }
   if (pathname === "/portfolio") return renderPortfolioPage(portfolioFilter);
   if (pathname === "/blog") return renderBlogPage(blogCategory);
   if (pathname.startsWith("/blog/")) {
@@ -56,6 +61,11 @@ export function renderPage(pathname, { portfolioFilter, blogCategory } = {}) {
 }
 
 export function getPageMetadata(pathname) {
+  const service = pathname.startsWith("/services/")
+    ? servicesData.find(
+        (item) => encodeURIComponent(item.id) === pathname.slice("/services/".length),
+      )
+    : null;
   const article = pathname.startsWith("/blog/")
     ? blogPosts.find(
         (post) => encodeURIComponent(post.slug) === pathname.slice("/blog/".length),
@@ -66,6 +76,13 @@ export function getPageMetadata(pathname) {
     return {
       title: `${article.title} | المدونة | حلول سوفت`,
       description: article.excerpt,
+    };
+  }
+
+  if (service) {
+    return {
+      title: `${service.title} | خدماتنا | حلول سوفت`,
+      description: service.description,
     };
   }
 

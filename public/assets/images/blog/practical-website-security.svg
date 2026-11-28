@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="none">
+  <defs>
+    <linearGradient id="background" x1="48" y1="42" x2="592" y2="598" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#E8F0F6"/>
+    </linearGradient>
+    <filter id="shadow" x="110" y="66" width="420" height="514" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="12"/>
+      <feOffset dy="9"/>
+      <feColorMatrix values="0 0 0 0 0.031 0 0 0 0 0.137 0 0 0 0 0.235 0 0 0 0.14 0"/>
+      <feBlend in2="SourceGraphic" result="shadow"/>
+      <feBlend in="SourceGraphic" in2="shadow" result="shape"/>
+    </filter>
+  </defs>
+  <rect width="640" height="640" rx="38" fill="url(#background)"/>
+  <circle cx="520" cy="128" r="63" fill="#E85D24" fill-opacity=".08"/>
+  <circle cx="104" cy="504" r="76" fill="#083358" fill-opacity=".05"/>
+  <g filter="url(#shadow)">
+    <path d="M320 99 476 158v123c0 104-64 176-156 218-92-42-156-114-156-218V158l156-59Z" fill="#fff"/>
+    <path d="M320 126 451 176v104c0 85-49 145-131 184-82-39-131-99-131-184V176l131-50Z" fill="#EAF1F6"/>
+    <path d="M320 159 426 200v81c0 66-37 114-106 149-69-35-106-83-106-149v-81l106-41Z" fill="#083358"/>
+    <rect x="270" y="264" width="100" height="82" rx="16" fill="#fff"/>
+    <path d="M290 264v-20c0-17 13-30 30-30s30 13 30 30v20" stroke="#E85D24" stroke-width="12" stroke-linecap="round"/>
+    <circle cx="320" cy="299" r="8" fill="#E85D24"/>
+    <path d="M320 307v17" stroke="#E85D24" stroke-width="7" stroke-linecap="round"/>
+    <path d="m292 386 20 20 43-49" stroke="#fff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <rect x="81" y="349" width="142" height="76" rx="16" fill="#fff"/>
+  <circle cx="110" cy="387" r="15" fill="#FFF0E9"/>
+  <path d="M105 387h10M110 382v10" stroke="#E85D24" stroke-width="3" stroke-linecap="round"/>
+  <rect x="136" y="377" width="67" height="8" rx="4" fill="#083358"/>
+  <rect x="136" y="395" width="51" height="7" rx="3.5" fill="#B9C8D4"/>
+  <rect x="417" y="390" width="142" height="76" rx="16" fill="#fff"/>
+  <circle cx="446" cy="428" r="15" fill="#EAF1F6"/>
+  <path d="m440 428 4 4 8-9" stroke="#083358" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="472" y="418" width="67" height="8" rx="4" fill="#083358"/>
+  <rect x="472" y="436" width="51" height="7" rx="3.5" fill="#B9C8D4"/>
+</svg>

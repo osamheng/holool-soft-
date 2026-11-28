@@ -6,6 +6,7 @@ const blogPosts = [
     excerpt:
       "الموقع الناجح يبدأ بفهم الهدف والجمهور، ثم ترتيب المحتوى والوظائف قبل اختيار الألوان أو التقنية.",
     icon: "</>",
+    coverImage: "/assets/images/blog/company-website-planning.svg",
     publishedAt: "2026-11-26",
     publishedLabel: "26 نوفمبر 2026",
     readingTime: "5 دقائق",
@@ -54,6 +55,7 @@ const blogPosts = [
     excerpt:
       "الاختيار بين موقع تعريفي وتطبيق ويب يعتمد على ما يحتاج المستخدم إلى إنجازه، لا على الاسم أو التقنية.",
     icon: "{ }",
+    coverImage: "/assets/images/blog/website-vs-web-app.svg",
     publishedAt: "2026-11-26",
     publishedLabel: "26 نوفمبر 2026",
     readingTime: "4 دقائق",
@@ -95,6 +97,7 @@ const blogPosts = [
     excerpt:
       "الحماية ليست إعدادًا واحدًا؛ إنها مجموعة ممارسات مستمرة تقلل المخاطر وتحافظ على الموقع وبيانات مستخدميه.",
     icon: "✓",
+    coverImage: "/assets/images/blog/practical-website-security.svg",
     publishedAt: "2026-11-26",
     publishedLabel: "26 نوفمبر 2026",
     readingTime: "5 دقائق",
@@ -136,6 +139,7 @@ const blogPosts = [
     excerpt:
       "قارن بين موارد الاستضافة والدعم والنسخ الاحتياطية وسهولة التوسع، ولا تجعل السعر وحده معيار القرار.",
     icon: "⌁",
+    coverImage: "/assets/images/blog/choosing-web-hosting.svg",
     publishedAt: "2026-11-26",
     publishedLabel: "26 نوفمبر 2026",
     readingTime: "4 دقائق",
